@@ -41,6 +41,7 @@ function build_tree(
     min_purity_increase=0.0;
     rng=Random.GLOBAL_RNG,
     impurity_importance::Bool=true,
+    weights=nothing,
 ) where {S,T<:Float64}
     if max_depth == -1
         max_depth = typemax(Int)
@@ -53,7 +54,7 @@ function build_tree(
     t = treeregressor.fit(;
         X=features,
         Y=labels,
-        W=nothing,
+        W=weights,
         max_features=Int(n_subfeatures),
         max_depth=Int(max_depth),
         min_samples_leaf=Int(min_samples_leaf),
